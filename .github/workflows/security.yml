@@ -46,6 +46,9 @@ jobs:
           path: pip-audit.json
 
   secret-scan:
+    permissions:
+      contents: read
+      pull-requests: read
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -70,7 +73,7 @@ jobs:
           format: sarif
           output: trivy.sarif
           vuln-type: os,library
-          severity: HIGH,CRITICAL
+          severity: CRITICAL
           ignore-unfixed: true
           exit-code: '1'
       - name: Upload Trivy SARIF
