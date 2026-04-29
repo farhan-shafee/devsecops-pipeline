@@ -3,6 +3,7 @@
 install:
 	python -m pip install --upgrade pip
 	pip install -r requirements.txt
+	pip install -r requirements-security.txt
 
 test:
 	pytest -q
@@ -11,7 +12,7 @@ sast:
 	semgrep scan --config auto src
 
 depscan:
-	pip-audit -r requirements.txt
+	pip-audit -r requirements.txt --strict
 
 secretscan:
 	docker run --rm -v "$$(pwd):/path" zricethezav/gitleaks:latest detect --source=/path

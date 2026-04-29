@@ -70,6 +70,7 @@ Developer Commit/PR
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+pip install -r requirements-security.txt
 ```
 
 ### Run locally
@@ -81,7 +82,7 @@ make security
 
 ## Sample outputs
 
-Sample report files are included for portfolio review:
+Sample report files are included for portfolio review (illustrative placeholders):
 
 - `reports/sample-semgrep.json`
 - `reports/sample-pip-audit.json`
