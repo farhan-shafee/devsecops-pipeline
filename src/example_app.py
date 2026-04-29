@@ -1,13 +1,19 @@
-from flask import Flask
+import os
+from flask import Flask, jsonify
 
 app = Flask(__name__)
 
 
 @app.route("/")
 def index():
-    return "Hello from the DevSecOps demo app!"
+    return jsonify({"message": "Hello from the DevSecOps portfolio lab"})
+
+
+@app.route("/healthz")
+def healthcheck():
+    api_mode = os.getenv("APP_MODE", "lab")
+    return jsonify({"status": "ok", "mode": api_mode})
 
 
 if __name__ == "__main__":
-    # Debug server for local testing only – not for production
     app.run(host="0.0.0.0", port=8000)

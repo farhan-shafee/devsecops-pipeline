@@ -1,0 +1,76 @@
+name: Security Pipeline
+
+on:
+  pull_request:
+  push:
+    branches: [main, repo-polish]
+
+jobs:
+  sast-semgrep:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --upgrade pip
+          pip install semgrep
+      - name: Run Semgrep
+        run: semgrep scan --config auto --json --output reports/sample-semgrep.json src
+      - uses: actions/upload-artifact@v4
+        with:
+          name: semgrep-report
+          path: reports/sample-semgrep.json
+
+  dependency-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --upgrade pip
+          pip install pip-audit
+      - name: Run pip-audit
+        run: pip-audit -r requirements.txt --format json --output reports/sample-pip-audit.json || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pip-audit-report
+          path: reports/sample-pip-audit.json
+
+  secret-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITLEAKS_ENABLE_COMMENTS: false
+      - name: Export gitleaks report (best effort)
+        run: |
+          docker run --rm -v "$PWD:/path" zricethezav/gitleaks:latest detect --source=/path --report-format=json --report-path=/path/reports/sample-gitleaks.json || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gitleaks-report
+          path: reports/sample-gitleaks.json
+
+  container-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t devsecops-lab:ci -f docker/Dockerfile .
+      - name: Run Trivy
+        uses: aquasecurity/trivy-action@0.24.0
+        with:
+          image-ref: devsecops-lab:ci
+          format: table
+          output: reports/sample-trivy.txt
+          vuln-type: os,library
+          severity: CRITICAL,HIGH
+      - uses: actions/upload-artifact@v4
+        with:
+          name: trivy-report
+          path: reports/sample-trivy.txt
