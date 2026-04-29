@@ -1,4 +1,9 @@
 .venv/
 __pycache__/
 .pytest_cache/
+pytest-cache-files-*/
+.audit_deps/
+.tracecov/
+.coverage
+htmlcov/
 *.pyc
