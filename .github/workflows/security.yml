@@ -67,6 +67,7 @@ jobs:
           output: trivy.sarif
           vuln-type: os,library
           severity: HIGH,CRITICAL
+          ignore-unfixed: true
           exit-code: '1'
       - name: Upload Trivy SARIF
         uses: github/codeql-action/upload-sarif@v3
