@@ -1,4 +1,5 @@
 {
-  "note": "Sample gitleaks output placeholder for portfolio demonstration.",
-  "findings": []
+  "_note": "Static example report only.",
+  "findings": [],
+  "result": "PASS"
 }

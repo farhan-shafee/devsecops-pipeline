@@ -1,14 +1,10 @@
 # Security Policy
 
-## Scope
+This repository is a portfolio lab.
 
-This repository is a portfolio lab. Security issues are welcome and help improve educational quality.
+If you identify a security issue in this code sample, please open an issue with:
+- reproduction steps
+- impact summary
+- proposed remediation
 
-## Reporting
-
-Please open a private security advisory in GitHub if available, or file an issue without disclosing active secrets.
-
-## Expectations
-
-- No guarantee of production-grade support timelines.
-- Findings are reviewed and remediated as part of iterative portfolio improvement.
+Do not include sensitive data in issues.

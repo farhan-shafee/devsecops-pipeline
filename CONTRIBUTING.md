@@ -1,13 +1,7 @@
 # Contributing
 
-## Development setup
+1. Create a branch from `main`.
+2. Run `make validate`, `make sast`, and `make audit`.
+3. Open a pull request with a clear summary.
 
-1. Create a virtual environment.
-2. Install dependencies with `pip install -r requirements.txt`.
-3. Run `make test` and `make security` before opening a PR.
-
-## Pull request guidelines
-
-- Keep changes scoped and explain security impact.
-- Include evidence (logs/report snippets) for security-related changes.
-- Avoid committing secrets, credentials, or private tokens.
+This project is educational and intentionally minimal.

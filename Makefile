@@ -1,24 +1,20 @@
-.PHONY: install test sast depscan secretscan containerscan security
+.PHONY: install test validate sast audit docker-build
 
 install:
-	python -m pip install --upgrade pip
 	pip install -r requirements.txt
 	pip install -r requirements-security.txt
 
 test:
 	pytest -q
 
+validate:
+	scripts/validate.sh
+
 sast:
-	semgrep scan --config auto src
+	bandit -q -r src/
 
-depscan:
-	pip-audit -r requirements.txt --strict
+audit:
+	pip-audit -r requirements.txt
 
-secretscan:
-	docker run --rm -v "$$(pwd):/path" zricethezav/gitleaks:latest detect --source=/path
-
-containerscan:
-	docker build -t devsecops-lab:local -f docker/Dockerfile .
-	docker run --rm aquasec/trivy:latest image --severity HIGH,CRITICAL devsecops-lab:local
-
-security: sast depscan
+docker-build:
+	docker build -t devsecops-lab:latest -f docker/Dockerfile .

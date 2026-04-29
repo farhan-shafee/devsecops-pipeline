@@ -1,36 +1,16 @@
-# DevSecOps Methodology (Portfolio Lab)
+# DevSecOps Methodology
 
-## Goals
+This lab uses a shift-left approach:
 
-- Catch common security issues early in pull requests.
-- Produce actionable findings with clear remediation paths.
-- Keep controls understandable and reproducible.
+1. Keep application code simple and testable.
+2. Run fast CI checks on every change.
+3. Run security checks in dedicated jobs for clear ownership.
+4. Fail quickly on actionable findings.
+5. Document remediation decisions.
 
-## Pipeline stages
+## Principles
 
-1. **Code quality & tests**
-   - Basic syntax validation and unit tests.
-2. **SAST**
-   - Semgrep scans application source for insecure patterns.
-3. **Dependency scanning**
-   - `pip-audit` flags known vulnerable dependencies.
-4. **Secret detection**
-   - Gitleaks detects exposed credentials and tokens.
-5. **Container image scanning**
-   - Trivy checks base image and package vulnerabilities.
-
-## Security gate strategy
-
-- Fail fast on high-confidence scanner failures.
-- Capture machine-readable reports for triage.
-- Apply remediation and re-run pipeline before merge.
-
-## Triage approach
-
-- Prioritize by exploitability and asset exposure.
-- Distinguish true positive vs. false positive.
-- Record compensating controls where risk is accepted.
-
-## Portfolio framing
-
-This repository demonstrates security engineering workflow mechanics and communication quality. It intentionally avoids claims about enterprise scale or production SLA outcomes.
+- Minimal dependencies reduce attack surface.
+- Security gates are explicit and reviewable.
+- Scan outputs are preserved as examples in `reports/`.
+- Findings should result in code or dependency changes, not hidden suppressions.

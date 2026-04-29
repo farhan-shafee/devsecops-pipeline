@@ -1,2 +1,5 @@
-Sample Trivy output placeholder for portfolio demonstration.
-No CRITICAL/HIGH findings in this sample file.
+Static example report only.
+Scanner: trivy
+Severity threshold: CRITICAL
+Findings: 0
+Result: PASS
