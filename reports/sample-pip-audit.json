@@ -1,4 +1,6 @@
 {
-  "note": "Sample pip-audit output placeholder for portfolio demonstration.",
-  "dependencies": []
+  "_note": "Static example report only.",
+  "dependencies_scanned": 1,
+  "vulnerabilities_found": 0,
+  "result": "PASS"
 }

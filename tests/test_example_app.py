@@ -1,15 +1,9 @@
-from src.example_app import app
+from src.example_app import add_numbers, health_payload
 
 
-def test_index():
-    client = app.test_client()
-    resp = client.get("/")
-    assert resp.status_code == 200
-    assert "portfolio lab" in resp.get_data(as_text=True)
+def test_add_numbers_returns_sum() -> None:
+    assert add_numbers(2, 3) == 5
 
 
-def test_healthz():
-    client = app.test_client()
-    resp = client.get("/healthz")
-    assert resp.status_code == 200
-    assert "status" in resp.get_data(as_text=True)
+def test_health_payload_is_stable() -> None:
+    assert health_payload() == {"status": "ok", "service": "example-app"}

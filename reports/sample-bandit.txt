@@ -1,0 +1,5 @@
+# Static example report only - generated sample for documentation.
+Run started: 2026-04-29T00:00:00Z
+Files scanned: src/
+Issues found: 0
+Result: PASS
