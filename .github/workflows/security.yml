@@ -12,29 +12,39 @@ jobs:
   sast-bandit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install -r requirements-security.txt
-      - run: bandit -q -r src/
+      - name: Install security dependencies
+        run: pip install -r requirements-security.txt
+      - name: Bandit scan
+        run: bandit -q -r src/
 
   dependency-scan:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install -r requirements-security.txt
-      - run: pip-audit -r requirements.txt
+      - name: Install security dependencies
+        run: pip install -r requirements-security.txt
+      - name: pip-audit scan
+        run: pip-audit -r requirements.txt
 
   secret-scan:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      pull-requests: read
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Gitleaks scan
         uses: gitleaks/gitleaks-action@v2
         env:
@@ -43,11 +53,12 @@ jobs:
   container-scan:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Build image
         run: docker build -t devsecops-lab:latest -f docker/Dockerfile .
       - name: Trivy scan
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@0.35.0
         with:
           image-ref: devsecops-lab:latest
           severity: CRITICAL
