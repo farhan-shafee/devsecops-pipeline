@@ -3,7 +3,7 @@ name: CI Validation
 on:
   pull_request:
   push:
-    branches: [main, repo-polish]
+    branches: [main]
 
 jobs:
   test-and-validate:

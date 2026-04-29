@@ -1,2 +1,0 @@
-Sample Trivy output placeholder for portfolio demonstration.
-No CRITICAL/HIGH findings in this sample file.

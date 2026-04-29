@@ -21,4 +21,4 @@ containerscan:
 	docker build -t devsecops-lab:local -f docker/Dockerfile .
 	docker run --rm aquasec/trivy:latest image --severity HIGH,CRITICAL devsecops-lab:local
 
-security: sast depscan
+security: sast depscan secretscan containerscan

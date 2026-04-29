@@ -21,7 +21,7 @@ This lab shows how to shift security checks left in CI/CD by combining:
 - `docker/` – container build assets
 - `.github/workflows/` – CI and security pipeline examples
 - `docs/` – methodology and architecture notes
-- `reports/` – sample scanner outputs and remediation examples
+- `reports/remediation/` – remediation examples (real scanner output is uploaded by CI as artifacts)
 - `scripts/` – local validation helpers
 
 ## Workflow overview
@@ -80,17 +80,11 @@ make test
 make security
 ```
 
-## Sample outputs
+## Remediation examples
 
-Sample report files are included for portfolio review (illustrative placeholders):
+- `reports/remediation/finding-to-fix.md` – worked examples of how findings are triaged and fixed.
 
-- `reports/sample-semgrep.json`
-- `reports/sample-pip-audit.json`
-- `reports/sample-gitleaks.json`
-- `reports/sample-trivy.txt`
-- `reports/remediation/finding-to-fix.md`
-
-These samples are illustrative and generated from this lab context, not from a production environment.
+Real scanner output is produced by the GitHub Actions pipeline on each push and pull request, and uploaded as workflow artifacts (Semgrep SARIF, pip-audit JSON, Trivy SARIF).
 
 ## Skills demonstrated
 
