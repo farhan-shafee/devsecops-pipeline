@@ -1,0 +1,5 @@
+Static example report only.
+Scanner: trivy
+Severity threshold: CRITICAL
+Findings: 0
+Result: PASS
